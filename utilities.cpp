@@ -11,9 +11,6 @@ void mpz_correct_mod(mpz_t result, mpz_t n, mpz_t d) {
   mpz_clear(temp);
 }
 
-unsigned long int max(unsigned long int a, unsigned long int b) {
-  return (a > b) ? a : b;
-}
 
 void textcolor(int attr, int fg) {
   //char command[13];

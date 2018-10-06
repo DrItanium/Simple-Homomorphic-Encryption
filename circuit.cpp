@@ -50,9 +50,9 @@ Gate::Gate(GateType gate_type, Gate *input1, Gate *input2, SecuritySettings *sec
   init_vars();
   if (gate_type == And) {
 	degree = input1->degree + input2->degree;
-	norm = max(input1->norm, input2->norm); // Not sure if norm can be computed bottom up
+	norm = max<decltype(input1->norm)>(input1->norm, input2->norm); // Not sure if norm can be computed bottom up
   } else {
-	degree = max(input1->degree, input2->degree);
+	degree = max<decltype(input1->degree)>(input1->degree, input2->degree);
 	norm = input1->norm + input2->norm;
   }
   input1->add_output(this);
