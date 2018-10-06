@@ -319,19 +319,19 @@ void FullyHomomorphic::print_key(const PrivateKey &sk, const PublicKey &pk) {
 
 void FullyHomomorphic::print_cipher_bit(const CipherBit &c) {
   textcolor(BRIGHT, WHITE);
-  printf("Cipher Bit");
+  std::cout << "Cipher Bit";
   resettextcolor();
-  printf(": {");
+  std::cout << ": {";
   textcolor(BRIGHT, GREEN);
   mpz_out_str(NULL, 10, c.old_ciphertext);
   resettextcolor();
-  printf(", {");
+  std::cout << ", {";
   for (unsigned long int i = 0; i < 49; i++) {
-	printf("%lu, ", c.z_vector[i]);
+	  std::cout << c.z_vector[i];
   }
-  printf("%lu...", c.z_vector[sec->public_key_y_vector_length-1]);
-  printf("} } ");
-  printf("size: %lu\n", mpz_sizeinbase(c.old_ciphertext, 2));
+  std::cout << c.z_vector[sec->public_key_y_vector_length-1];
+  std::cout << "} } ";
+  std::cout << "size: " << mpz_sizeinbase(c.old_ciphertext, 2) << std::endl;
 }
 
 /* ENCRYPTION */
@@ -656,10 +656,10 @@ void FullyHomomorphic::test_decryption_circuit(const PublicKey &pk, const Privat
 	  printf ("false ");
   }
   */   
-  unsigned long int w_length = log2(sec->theta+1);
-  unsigned long int p_length = pow(2, w_length);
 
   /* These are definitely correct
+  unsigned long int w_length = log2(sec->theta+1);
+  unsigned long int p_length = pow(2, w_length);
   printf("a[i][0] vector:\n");
   for (unsigned long int i = 0; i < sec->big_theta; i++) {
 	printf("%u", (bool) evaluated_plaintext[(w_length+1)*(n+1) + p_length*sec->big_theta + i*(n+1)]);
