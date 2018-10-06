@@ -50,7 +50,7 @@ class Gate {
   void update_outputs();
   void evaluate(const PublicKey &pk);
   void mod_reduce(const PublicKey &pk);
-  bool is_input() {return gate_type == Input;}
+  bool is_input() const { return gate_type == Input;}
   void set_input(CipherBit** inputs);
 
 };
