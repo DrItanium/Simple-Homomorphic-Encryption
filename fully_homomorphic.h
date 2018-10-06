@@ -14,7 +14,7 @@
 
 class FullyHomomorphic {
  private:
-  static unsigned int MAX_SOMEWHAT_PUBLIC_KEY_TRIES;
+  static const unsigned int MAX_SOMEWHAT_PUBLIC_KEY_TRIES;
   SecuritySettings *sec;
   gmp_randstate_t rand_state;
   CryptoPP::RandomPool rng;

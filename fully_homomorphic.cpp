@@ -1,16 +1,20 @@
 #include "fully_homomorphic.h"
+#include <iostream>
 
-unsigned int FullyHomomorphic::MAX_SOMEWHAT_PUBLIC_KEY_TRIES = 10;
+const unsigned int FullyHomomorphic::MAX_SOMEWHAT_PUBLIC_KEY_TRIES = 10;
 
 FullyHomomorphic::FullyHomomorphic (SecuritySettings *security_settings) : sec(security_settings) {
-  printf("Initializing random seed(s)\n");
+  std::cout << "Initializing random seed(s)" << std::endl;
   // TODO: Replace this with an autoseeded random pool for "production"
   srand(time(NULL));
   unsigned int init_seed = rand();
   srand(init_seed);
-  printf("seed: %u\n", init_seed);
+  std::cout << "seed: " << init_seed << std::endl;
+#ifdef OLD_CRYPTOPP
   rng.Put((byte*) &init_seed, sizeof(unsigned int));
-
+#else
+  rng.IncorporateEntropy((byte*)&init_seed, sizeof(unsigned int));
+#endif
   gmp_randinit_default(rand_state);
   byte seed_bytes[8];
   rng.GenerateBlock(seed_bytes, 8);
