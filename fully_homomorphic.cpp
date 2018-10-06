@@ -26,7 +26,7 @@ FullyHomomorphic::FullyHomomorphic (SecuritySettings *security_settings) : sec(s
 }
 
 void FullyHomomorphic::key_gen (PrivateKey &sk, PublicKey &pk) {
-  printf("Generating a key pair\n");
+  std::cout << "Generating a key pair" << std::endl;
   //SomewhatPrivateKey ssk;
   mpz_init(ssk);
   SomewhatPublicKey spk = new __mpz_struct* [sec->public_key_old_key_length];
@@ -96,7 +96,7 @@ void FullyHomomorphic::key_gen (PrivateKey &sk, PublicKey &pk) {
 
 
 void FullyHomomorphic::create_u_vector(mpz_t_arr result, mpz_t x_p, unsigned int* S) {
-  printf("Creating a U vector for public key\n");
+  std::cout << "Creating a U vector for public key" << std::endl;
   mpz_t sum_u_in_s;
   mpz_init(sum_u_in_s);
 
@@ -298,25 +298,23 @@ void FullyHomomorphic::choose_random_d(mpz_t result, SomewhatPrivateKey p) {
 }
 
 void FullyHomomorphic::print_key(const PrivateKey &sk, const PublicKey &pk) {
-  printf("Private Key: {");
+	std::cout << "Private Key: {";
   for (unsigned int i = 0; i < sec->private_key_length; i++) {
-	printf("%u, ", sk[i]);
+	  std::cout << sk[i] << ", ";
   }
-  printf("}\n");
-
-  printf("Public Key:\n");
-  printf("  Old Key: {");
+  std::cout << "}" << std::endl;
+  std::cout << "Public Key:\n  Old Key: {";
   for (unsigned int i = 0; i < 5; i++) {
 	mpz_out_str(NULL, 10, pk.old_key[i]);
-	printf(", ");
+	std::cout << ", ";
   }
-  printf("...\n");
-  printf("  y Vector: {");
+  std::cout << "..." << std::endl;
+  std::cout << "  y Vector: {";
   for (unsigned int i = 0; i < 5; i++) {
 	mpz_out_str(NULL, 10, pk.y_vector[i]);
-	printf(", ");
+	std::cout << ", ";
   }
-  printf("...\n");
+  std::cout << "..." << std::endl;
 }
 
 void FullyHomomorphic::print_cipher_bit(const CipherBit &c) {
