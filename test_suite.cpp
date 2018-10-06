@@ -2,6 +2,7 @@
 #include "utilities.h"
 #include "circuit.h"
 #include "security_settings.h"
+#include <iostream>
 
 bool OUTPUT = true;
 
@@ -207,6 +208,10 @@ void benchmark(FullyHomomorphic &fh, PublicKey &pk, PrivateKey &sk, SecuritySett
 
 int main(int argc, char** argv) {
   CryptoPP::AutoSeededRandomPool rng;
+  if (argc < 1) {
+	  std::cout << "No security settings specified" << std::endl;
+	  return 1;
+  }
   SecuritySettings *security_settings = new SecuritySettings(atoi(argv[1]));
   FullyHomomorphic fh(security_settings);
   PrivateKey sk;
